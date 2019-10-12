@@ -14,9 +14,7 @@ from bfm_core import HdlType, AbsLevel
 
 @bfm_core.bfm(bfm_hdl={
     HdlType.Verilog : {
-            AbsLevel.Signal : os.path.join(
-                os.path.dirname(os.path.abspath(__file__)), 
-                "hdl", "rv_data_out_bfm.sv")
+            AbsLevel.Signal : bfm_core.hdl_path(__file__, "rv_data_out_bfm.sv")
         }
     })
 class ReadyValidDataOutBFM(Driver):
@@ -34,6 +32,10 @@ class ReadyValidDataOutBFM(Driver):
 
     @cocotb.coroutine
     def write(self, data):
+        '''
+        Writes the specified data word to 
+        '''
+        
         yield RisingEdge(self.clock)
         self.data <= data
         self.data_valid <= 1
