@@ -7,15 +7,9 @@ import cocotb
 from cocotb.drivers import Driver
 from cocotb.triggers import RisingEdge, ReadOnly
 
-import bfm_core
-
-import os
-
-
-@bfm_core.bfm(bfm_hdl={
-    bfm_core.HdlType.Verilog : {
-        bfm_core.AbsLevel.Signal : bfm_core.hdl_path(__file__, "rv_data_in_bfm.sv")
-        }
+@cocotb.bfm(hdl={
+    cocotb.bfm_vlog : cocotb.bfm_hdl_path(__file__, "hdl/rv_data_in_bfm.v"),
+    cocotb.bfm_sv : cocotb.bfm_hdl_path(__file__, "hdl/rv_data_in_bfm.v")
     })
 class ReadyValidDataInBFM(Driver):
     

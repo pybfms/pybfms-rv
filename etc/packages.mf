@@ -1,0 +1,4 @@
+
+simscripts@http://github.com/mballance/simscripts.git
+fwprotocol-defs@http://github.com/Featherweight-IP/fwprotocol-defs.git
+
