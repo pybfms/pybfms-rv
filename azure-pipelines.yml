@@ -29,7 +29,7 @@ jobs:
   - script: |
       source activate BuildEnv
       ./scripts/ivpm.py update
-      source etc/rv_bfms.sh
+      source etc/rv_bfm_env.sh
       cd ve/rv_out/sim
       echo "** Running Icarus Verilog Test"
       runtest.pl -test tests/rv_out_smoke_test.f -sim ivl
