@@ -14,6 +14,7 @@ jobs:
     displayName: 'Install wheel+twine'
   - script: |
       sudo conda install -y -c timvideos iverilog verilator
+      source /usr/bin/activate
       echo "verilator: `which verilator`"
       echo "iverilog: `which iverilog`"
     displayName: 'Setup Test Tools'
