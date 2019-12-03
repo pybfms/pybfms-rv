@@ -4,21 +4,18 @@ variables:
 jobs:
 - job: PyPi_Linux
   pool:
-   vmImage: 'ubuntu-16.04'
+   vmImage: 'ubuntu-18.04'
   steps:
   - script: |
-      sudo add-apt-repository ppa:jonathonf/python-3.6
-      sudo apt-get update
       echo "Which python3: `which python3`"
       python3 --version
-      sudo apt-get install python3.6 -y
-      sudo python3.6 -m pip install wheel
-      sudo python3.6 -m pip install twine
+      sudo python3 -m pip install wheel
+      sudo python3 -m pip install twine
     displayName: 'Install wheel+twine'
   - script: |
       echo "Directory:"
       ls
-      python3.6 setup.py bdist_wheel --universal
+      python3 setup.py bdist_wheel --universal
     displayName: 'Build Wheel'
   - task: TwineAuthenticate@1
     condition: eq(variables['Build.SourceBranchName'], 'master')
@@ -27,9 +24,9 @@ jobs:
   - script: |
       # Only deploy from master
       if test "$(Build.SourceBranchName)" = "master"; then
-          python3.6 -m twine --version
+          python3 -m twine --version
           echo "Calling twine"
-          python3.6 -m twine upload -r rv_bfms --config-file $(PYPIRC_PATH) dist/*.whl
+          python3 -m twine upload -r rv_bfms --config-file $(PYPIRC_PATH) dist/*.whl
           echo "Calling twine complete"
       fi
     displayName: 'Upload to PyPi'
