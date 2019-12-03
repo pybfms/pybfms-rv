@@ -7,14 +7,12 @@ jobs:
    vmImage: 'ubuntu-18.04'
   steps:
   - script: |
-      echo "Which python3: `which python3`"
-      python3 --version
+      echo "Conda: `which conda`"
+      echo "Conda version: `conda --version`"
       sudo python3 -m pip install wheel
       sudo python3 -m pip install twine
     displayName: 'Install wheel+twine'
   - script: |
-      echo "Directory:"
-      ls
       python3 setup.py bdist_wheel --universal
     displayName: 'Build Wheel'
   - task: TwineAuthenticate@1
