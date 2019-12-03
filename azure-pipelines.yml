@@ -30,6 +30,10 @@ jobs:
       source activate BuildEnv
       ./scripts/ivpm.py update
       source etc/rv_bfm_env.sh
+      which_conda=`which conda`
+      conda_bindir=`dirname $which_conda`
+      conda_dir=`dirname $conda_bindir`
+      export LD_LIBRARY_PATH=$conda_dir/lib:$LD_LIBRARY_PATH
       cd ve/rv_out/sim
       echo "** Running Icarus Verilog Test"
       runtest.pl -test tests/rv_out_smoke_test.f -sim ivl
