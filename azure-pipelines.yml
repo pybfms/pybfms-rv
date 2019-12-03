@@ -13,8 +13,9 @@ jobs:
       sudo python3 -m pip install twine
     displayName: 'Install wheel+twine'
   - script: |
-      sudo conda install -y -c timvideos iverilog verilator
-      source /usr/bin/activate
+      conda env create --yes --quiet --name TestEnv
+      source activate TestEnv
+      conda install -y -c timvideos --name TestEnv iverilog verilator
       echo "verilator: `which verilator`"
       echo "iverilog: `which iverilog`"
     displayName: 'Setup Test Tools'
