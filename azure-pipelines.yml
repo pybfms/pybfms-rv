@@ -40,7 +40,7 @@ jobs:
       echo "** Running Icarus Verilog Test"
       runtest.pl -test tests/rv_out_smoke_test.f -sim ivl
       echo "** Running Verilator Test"
-      runtest.pl -test tests/rv_out_smoke_test.f -sim vlsim
+      runtest.pl -test tests/rv_out_smoke_test.f -sim vlsim +tool.vlsim.tracevcd
     displayName: 'Run Tests'
   - script: |
       python setup.py bdist_wheel --universal
