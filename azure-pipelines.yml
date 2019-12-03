@@ -6,21 +6,21 @@ jobs:
   pool:
    vmImage: 'ubuntu-18.04'
   steps:
-  - script: |
-      echo "Conda: `which conda`"
-      echo "Conda version: `conda --version`"
-      sudo python3 -m pip install wheel
-      sudo python3 -m pip install twine
-    displayName: 'Install wheel+twine'
-    
   - bash: echo "##vso[task.prependpath]$CONDA/bin"
     displayName: Add conda to PATH
     
   - script: |
       echo "Which Conda: `which conda`"
-      conda env create --yes --name TestEnv
-      source activate TestEnv
-      conda install -y -c timvideos --name TestEnv iverilog verilator
+      conda create --yes --name BuildEnv
+      source activate BuildEnv
+      echo "Conda: `which conda`"
+      echo "Conda version: `conda --version`"
+      python -m pip install wheel
+      python -m pip install twine
+    displayName: 'Install wheel+twine'
+    
+  - script: |
+      conda install -y -c timvideos --name BuildEnv iverilog verilator
       echo "verilator: `which verilator`"
       echo "iverilog: `which iverilog`"
     displayName: 'Setup Test Tools'
@@ -29,7 +29,7 @@ jobs:
       ./scripts/ivpm.py update
     displayName: 'Run Tests'
   - script: |
-      python3 setup.py bdist_wheel --universal
+      python setup.py bdist_wheel --universal
     displayName: 'Build Wheel'
   - task: TwineAuthenticate@1
     condition: eq(variables['Build.SourceBranchName'], 'master')
@@ -38,9 +38,9 @@ jobs:
   - script: |
       # Only deploy from master
       if test "$(Build.SourceBranchName)" = "master"; then
-          python3 -m twine --version
+          python -m twine --version
           echo "Calling twine"
-          python3 -m twine upload -r rv_bfms --config-file $(PYPIRC_PATH) dist/*.whl
+          python -m twine upload -r rv_bfms --config-file $(PYPIRC_PATH) dist/*.whl
           echo "Calling twine complete"
       fi
     displayName: 'Upload to PyPi'
