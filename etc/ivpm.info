@@ -1,5 +1,4 @@
 
-name=fwrisc
-version=1.0.0
-rootvar=FWRISC
+name=rv_bfms
+version=0.0.1
 
