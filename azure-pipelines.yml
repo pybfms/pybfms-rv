@@ -23,6 +23,7 @@ jobs:
   - script: |
       source activate BuildEnv
       conda install -y -c timvideos --name BuildEnv iverilog verilator
+      conda install -y -c anaconda  --name BuildEnv zlib
       echo "verilator: `which verilator`"
       echo "iverilog: `which iverilog`"
     displayName: 'Setup Test Tools'
