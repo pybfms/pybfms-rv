@@ -20,12 +20,14 @@ jobs:
     displayName: 'Install wheel+twine'
     
   - script: |
+      source activate BuildEnv
       conda install -y -c timvideos --name BuildEnv iverilog verilator
       echo "verilator: `which verilator`"
       echo "iverilog: `which iverilog`"
     displayName: 'Setup Test Tools'
 
   - script: |
+      source activate BuildEnv
       ./scripts/ivpm.py update
     displayName: 'Run Tests'
   - script: |
