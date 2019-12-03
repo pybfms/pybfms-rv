@@ -29,6 +29,12 @@ jobs:
   - script: |
       source activate BuildEnv
       ./scripts/ivpm.py update
+      source etc/rv_bfms.sh
+      cd ve/rv_out/sim
+      echo "** Running Icarus Verilog Test"
+      runtest.pl -test tests/rv_out_smoke_test.f -sim ivl
+      echo "** Running Verilator Test"
+      runtest.pl -test tests/rv_out_smoke_test.f -sim vlsim
     displayName: 'Run Tests'
   - script: |
       python setup.py bdist_wheel --universal
