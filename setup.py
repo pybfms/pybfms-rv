@@ -1,18 +1,10 @@
 
 import os
-from setuptools import setup
 
 import sys, os.path, platform, warnings
 
 from distutils import log
 from distutils.core import setup, Command
-#from Cython.Build import cythonize
-#from distutils.core import Distribution as _Distribution
-#from distutils.core import Extension as _Extension
-#from distutils.dir_util import mkpath
-#from distutils.command.build_ext import build_ext as _build_ext
-#from distutils.command.bdist_rpm import bdist_rpm as _bdist_rpm
-#from distutils.errors import DistutilsError, CompileError, LinkError, DistutilsPlatformError
 
 VERSION = None
 with open("etc/ivpm.info") as fp:
