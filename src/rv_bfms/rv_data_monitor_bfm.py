@@ -23,7 +23,7 @@ class ReadyValidDataMonitorBFM():
         self.listener_l.append(l)
 
     @cocotb.bfm_export(cocotb.bfm_uint64_t)
-    def data_recv(self, d):
+    def _data_recv(self, d):
         for l in self.listener_l:
             l.data_recv(d)
     

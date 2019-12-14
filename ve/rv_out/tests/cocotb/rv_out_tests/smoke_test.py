@@ -3,6 +3,7 @@ import cocotb
 from rv_bfms.rv_data_monitor_if import ReadyValidDataMonitorIF
 from cocotb.bfms import BfmMgr
 from cocotb.triggers import Timer
+import random
 
 class SmokeTest(ReadyValidDataMonitorIF):
     
@@ -22,6 +23,9 @@ class SmokeTest(ReadyValidDataMonitorIF):
         
         for i in range(1,101):
             yield self.out_bfm.write_c(i)
+            
+            # Wait briefly in between writes
+            yield Timer(100000*random.randint(0,10))
 
         # Wait briefly for a final monitor item
         yield Timer(10)

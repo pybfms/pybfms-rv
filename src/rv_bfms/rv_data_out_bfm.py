@@ -26,7 +26,7 @@ class ReadyValidDataOutBFM():
         '''
         
         yield self.busy.acquire()
-        self.write_req(data)
+        self._write_req(data)
 
         # Wait for acknowledge of the transfer
         yield self.ack_ev.wait()
@@ -35,10 +35,10 @@ class ReadyValidDataOutBFM():
         self.busy.release()
 
     @cocotb.bfm_import(cocotb.bfm_uint32_t)
-    def write_req(self, d):
+    def _write_req(self, d):
         pass
     
     @cocotb.bfm_export()
-    def write_ack(self):
+    def _write_ack(self):
         self.ack_ev.set()
     

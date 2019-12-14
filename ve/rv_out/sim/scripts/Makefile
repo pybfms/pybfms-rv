@@ -5,6 +5,8 @@ SCRIPTS_DIR := $(abspath $(dir $(lastword $(MAKEFILE_LIST))))
 include $(PACKAGES_DIR)/packages.mk
 include $(PACKAGES_DIR)/simscripts/mkfiles/plusargs.mk
 
+TIMEOUT ?= 10ms
+
 PLUSARGS += +tool.cocotb
 
 PYTHONPATH:=$(SCRIPTS_DIR)/../../tests/cocotb:$(PYTHONPATH)

@@ -29,7 +29,7 @@ module rv_data_monitor_bfm #(
 	
 	always @(posedge clock) begin
 		if (!reset && data_valid && data_ready) begin
-			data_recv(data);
+			_data_recv(data);
 		end
 	end
 	
