@@ -17,18 +17,17 @@ class SmokeTest(ReadyValidDataMonitorIF):
     def data_recv(self, d):
         self.recv_data_l.append(d)
 
-    @cocotb.coroutine
-    def run_c(self):
+    async def run_c(self):
         errors = 0
         
         for i in range(1,101):
-            yield self.out_bfm.write_c(i)
+            await self.out_bfm.write_c(i)
             
             # Wait briefly in between writes
-            yield Timer(100000*random.randint(0,10))
+            await Timer(100000*random.randint(0,10))
 
         # Wait briefly for a final monitor item
-        yield Timer(10)
+        await Timer(10)
 
         if len(self.recv_data_l) != 100:
             print("Error: too few data items received: " + str(len(self.recv_data_l)))
@@ -46,7 +45,7 @@ class SmokeTest(ReadyValidDataMonitorIF):
             print("FAILED: " + cocotb.plusargs["TESTNAME"])
 
 @cocotb.test()
-def runtest(dut):
+async def runtest(dut):
     test = SmokeTest()
     
-    yield test.run_c()
+    await test.run_c()
