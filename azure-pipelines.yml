@@ -16,9 +16,8 @@ jobs:
       source activate BuildEnv
       echo "Conda: `which conda`"
       echo "Conda version: `conda --version`"
-      python -m pip install wheel
-      python -m pip install twine
-    displayName: 'Install wheel+twine'
+      python -m pip install wheel twine ivpm
+    displayName: 'Install wheel+twine+ivpm'
     
   - script: |
       source activate BuildEnv
