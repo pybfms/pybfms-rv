@@ -1,6 +1,6 @@
 
 -e git+http://github.com/mballance/vlsim.git#egg=vlsim
--e git+https://github.com/mballance/cocotb.git@conda-fixup#egg=cocotb
+-e git+https://github.com/mballance/cocotb.git@conda-fixup_1#egg=cocotb
 -e git+https://github.com/pybfms/pybfms.git#egg=pybfms
 -e git+https://github.com/fvutils/fltools.git#egg=fltools
 
