@@ -18,7 +18,7 @@ module rv_data_in_bfm #(
 		);
 	
 	// Auto-generated code to implement the BFM API
-${cocotb_bfm_api_impl}
+${pybfms_api_impl}
 
 endmodule
 

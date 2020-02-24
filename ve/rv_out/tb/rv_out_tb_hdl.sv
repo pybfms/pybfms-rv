@@ -6,7 +6,9 @@
 `timescale 1ns/1ns
 `endif
 
-module rv_out_tb_hdl(input clock);
+module rv_out_tb_hdl(
+	input clock /*verilator public */
+	);
 
 `ifdef HAVE_HDL_CLKGEN
 	reg clk_r = 0;

@@ -1,15 +1,15 @@
 
-import cocotb
 from rv_bfms.rv_data_monitor_if import ReadyValidDataMonitorIF
-from cocotb.bfms import BfmMgr
+import pybfms
+import cocotb
 from cocotb.triggers import Timer
 import random
 
 class SmokeTest(ReadyValidDataMonitorIF):
     
     def __init__(self):
-        self.out_bfm = BfmMgr.find_bfm(".*u_dut")
-        self.mon_bfm = BfmMgr.find_bfm(".*u_mon")
+        self.out_bfm = pybfms.find_bfm(".*u_dut")
+        self.mon_bfm = pybfms.find_bfm(".*u_mon")
         self.mon_bfm.add_listener(self)
         self.recv_data_l = []
         pass
@@ -46,6 +46,8 @@ class SmokeTest(ReadyValidDataMonitorIF):
 
 @cocotb.test()
 async def runtest(dut):
+    await pybfms.init()
+    
     test = SmokeTest()
     
     await test.run_c()

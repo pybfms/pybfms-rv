@@ -4,41 +4,43 @@ Created on Oct 6, 2019
 @author: ballance
 '''
 
-import cocotb
-from cocotb.drivers import Driver
-from cocotb.triggers import RisingEdge, ReadOnly, Lock, Event
+import pybfms
 
 
-@cocotb.bfm(hdl={
-    cocotb.bfm_vlog : cocotb.bfm_hdl_path(__file__, "hdl/rv_data_out_bfm.v"),
-    cocotb.bfm_sv   : cocotb.bfm_hdl_path(__file__, "hdl/rv_data_out_bfm.v")
-    })
+@pybfms.bfm(hdl={
+    pybfms.BfmType.Verilog : pybfms.bfm_hdl_path(__file__, "hdl/rv_data_out_bfm.v"),
+    pybfms.BfmType.SystemVerilog : pybfms.bfm_hdl_path(__file__, "hdl/rv_data_out_bfm.v")
+    }, has_init=True)
 class ReadyValidDataOutBFM():
 
     def __init__(self):
-        self.busy = Lock()
-        self.ack_ev = Event()
+        self.busy = pybfms.lock()
+        self.ack_ev = pybfms.event()
+        self.data_width = 0
 
-    @cocotb.coroutine
-    def write_c(self, data):
+    async def write_c(self, data):
         '''
         Writes the specified data word to the interface
         '''
         
-        yield self.busy.acquire()
+        await self.busy.acquire()
         self._write_req(data)
 
         # Wait for acknowledge of the transfer
-        yield self.ack_ev.wait()
+        await self.ack_ev.wait()
         self.ack_ev.clear()
 
         self.busy.release()
 
-    @cocotb.bfm_import(cocotb.bfm_uint32_t)
+    @pybfms.import_task(pybfms.uint64_t)
     def _write_req(self, d):
         pass
     
-    @cocotb.bfm_export()
+    @pybfms.export_task()
     def _write_ack(self):
         self.ack_ev.set()
+        
+    @pybfms.export_task(pybfms.uint32_t)
+    def _set_parameters(self, data_width):
+        self.data_width = data_width
     

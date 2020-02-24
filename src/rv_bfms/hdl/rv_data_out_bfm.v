@@ -60,11 +60,14 @@ module rv_data_out_bfm #(
 		end
 	endtask
 	
-	
+
+	task init();
+		_set_parameters(DATA_WIDTH);
+	endtask
 	
 	
 	// Auto-generated code to implement the BFM API
-${cocotb_bfm_api_impl}
+${pybfms_api_impl}
 
 endmodule
 
