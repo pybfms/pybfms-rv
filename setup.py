@@ -30,14 +30,14 @@ if bdist_wheel:
     cmdclass['bdist_wheel'] = bdist_wheel
 
 setup(
-  name = "rv_bfms",
+  name = "pybfms_rv",
   version=VERSION,
-  packages=['rv_bfms'],
+  packages=['pybfms_rv'],
   package_dir = {'' : 'src'},
   package_data = {'rv_bfms': ['hdl/*.v']},
   author = "Matthew Ballance",
   author_email = "matt.ballance@gmail.com",
-  description = ("rv_bfms provides bus functional models for the ready/valid protocol"),
+  description = ("pybfms_rv provides bus functional models for the ready/valid protocol"),
   license = "Apache 2.0",
   keywords = ["SystemVerilog", "Verilog", "RTL", "cocotb"],
   url = "https://github.com/pybfms/rv_bfms",
