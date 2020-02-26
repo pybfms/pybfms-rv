@@ -32,7 +32,7 @@ if bdist_wheel:
 setup(
   name = "pybfms_rv",
   version=VERSION,
-  packages=['pybfms_rv'],
+  packages=['rv_bfms'],
   package_dir = {'' : 'src'},
   package_data = {'rv_bfms': ['hdl/*.v']},
   author = "Matthew Ballance",
