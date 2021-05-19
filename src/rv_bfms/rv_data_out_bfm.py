@@ -18,13 +18,13 @@ class ReadyValidDataOutBFM():
         self.ack_ev = pybfms.event()
         self.data_width = 0
 
-    async def write_c(self, data):
+    async def send(self, data):
         '''
         Writes the specified data word to the interface
         '''
         
         await self.busy.acquire()
-        self._write_req(data)
+        self._send_req(data)
 
         # Wait for acknowledge of the transfer
         await self.ack_ev.wait()
@@ -33,11 +33,11 @@ class ReadyValidDataOutBFM():
         self.busy.release()
 
     @pybfms.import_task(pybfms.uint64_t)
-    def _write_req(self, d):
+    def _send_req(self, d):
         pass
     
     @pybfms.export_task()
-    def _write_ack(self):
+    def _send_ack(self):
         self.ack_ev.set()
         
     @pybfms.export_task(pybfms.uint32_t)

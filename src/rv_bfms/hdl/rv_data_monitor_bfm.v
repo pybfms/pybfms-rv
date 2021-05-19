@@ -38,7 +38,9 @@ module rv_data_monitor_bfm #(
 	endtask
 	
 	// Auto-generated code to implement the BFM API
+`ifdef PYBFMS_GEN
 ${pybfms_api_impl}
+`endif
 
 endmodule
 
