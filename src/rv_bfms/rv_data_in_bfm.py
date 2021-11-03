@@ -28,7 +28,7 @@ class ReadyValidDataInBFM():
             await self.reset_ev.wait()
         
     async def recv(self):
-        ev = pybms.event()        
+        ev = pybfms.event()        
         def cb(data):
             nonlocal ev
             ev.set(data)
