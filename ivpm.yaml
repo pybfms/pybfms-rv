@@ -1,0 +1,41 @@
+package:
+    name: rv_bfms
+    version: None
+    deps:
+        - name: simscripts
+          url: http://github.com/mballance/simscripts.git
+          type: raw
+        - name: fwprotocol-defs
+          url: http://github.com/Featherweight-IP/fwprotocol-defs.git
+          type: raw
+        - name: vlsim
+          url: http://github.com/mballance/vlsim.git
+          type: python
+        - name: cocotb
+          type: python
+          src: pypi
+        - name: pybfms
+          type: python
+          src: pypi
+        - name: fltools
+          url: https://github.com/fvutils/fltools.git
+          type: python
+    dev-deps:
+        - name: simscripts
+          url: http://github.com/mballance/simscripts.git
+          type: raw
+        - name: fwprotocol-defs
+          url: http://github.com/Featherweight-IP/fwprotocol-defs.git
+          type: raw
+        - name: vlsim
+          url: http://github.com/mballance/vlsim.git
+          type: python
+        - name: cocotb
+          url: https://github.com/mballance/cocotb.git
+          type: python
+        - name: pybfms
+          url: https://github.com/pybfms/pybfms.git
+          type: python
+        - name: fltools
+          url: https://github.com/fvutils/fltools.git
+          type: python
